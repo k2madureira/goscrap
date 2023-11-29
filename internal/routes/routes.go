@@ -19,6 +19,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func apiDataHandler(w http.ResponseWriter, r *http.Request) {
-	data := "Some data"
+	data := "Some data from api"
 	fmt.Fprintln(w, data)
 }
