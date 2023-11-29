@@ -9,6 +9,10 @@ build:
 run:
 		@go run cmd/goscrap/main.go
 
+# Run the aplication with air
+run-air:
+		@air cmd/goscrap/main.go
+
 # Test the aplication
 test:
 		@echo "Testing..."
