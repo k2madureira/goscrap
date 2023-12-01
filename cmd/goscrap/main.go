@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/k2madureira/goscrap/internal/server"
+	"github.com/k2madureira/goscrap/infra/server"
 )
 
 func main() {
