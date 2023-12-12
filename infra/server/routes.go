@@ -3,27 +3,21 @@ package server
 import (
 	"net/http"
 
-	pages "github.com/k2madureira/goscrap/internal/modules/pages"
+	pokesRouter "github.com/k2madureira/goscrap/internal/modules/pokes"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
-	"github.com/go-chi/cors"
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 func (s *Server) RegisterRoutes() http.Handler {
-	cors := cors.New(cors.Options{
-		AllowedOrigins:   []string{"*"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"},
-		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
-		AllowCredentials: true,
-		MaxAge:           300,
-	})
 
-	r := chi.NewRouter()
-	r.Use(cors.Handler)
-	r.Use(middleware.Logger)
+	r := gin.Default()
+	r.Use(gin.Logger())
+	r.Use(gin.Recovery())
 
-	r.Mount("/pages", pages.Router())
+	pokes := r.Group("/pokes")
+	pokesRouter.Router(pokes)
 
+	r.Use(cors.Default())
 	return r
 }
